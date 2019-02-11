@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
@@ -29,7 +30,10 @@ public class Titulo {
 	/*Notaçao para a data @Temporal, que no caso vai ser somente data sem hora, mas se quiser outro basta escolher*/
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")/*MM= representa MÊS. mm= representa minutos*/
+	
 	private Date dataVencimento;
+	
+	@NotNull
 	@NumberFormat(pattern = "#,##0.00")
 	private BigDecimal valor;
 	

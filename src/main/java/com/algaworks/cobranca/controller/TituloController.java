@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,10 +47,16 @@ public class TituloController {
 	 (Esse é o link da view com a model, HTML propriedade NAME com o mesmo nome que as propriedades que estão na MODEL JPA)
 	 Agora preciso mapear a URL que vai ser entregue nesse método com esses dados: @RequestMapping() */
 	@RequestMapping(value = "/titulos", method = RequestMethod.POST)
-	public ModelAndView salvar(Titulo titulo) {
-		titulos.save(titulo);
-		System.out.println("\n>>>" + titulo.getDescricao());
+	public ModelAndView salvar(@Validated Titulo titulo, Errors errors) {
+		
 		ModelAndView mv = new ModelAndView("CadastroTitulo");
+		if (errors.hasErrors()){
+			return mv;
+		}
+		
+		titulos.save(titulo);
+		//System.out.println("\n>>>" + titulo.getDescricao());//So recuperando um dado da Model pra treinar
+		
 		mv.addObject("mensagem", "Dado salvo com sucesso!");//Parâmetros desse método:"nomeDaVariável","Mensagem que será exibida"
 		return mv;
 	}
