@@ -21,10 +21,10 @@ public class TituloController {
 	 é necessário colocar a notação @Autowired e assim o Spring localiza a implementação desse objeto e posso usar os metodos.
 	 Se eu não fizer essa notação, dará nullPoint, pois o spring não sabe de onde vem esse objeto.*/
 	@Autowired
-	private Titulos titulos;
+	private Titulos titulos;//Interface
 	
 	
-	//É a URL mapeada que apontará para a CadastroTitulo.html ou outra extensão
+	//1° É a URL mapeada que apontará para a CadastroTitulo.html ou outra extensão
 	@RequestMapping("/titulos/novo")
 	//public String novo() {
 	public ModelAndView novo() {
@@ -32,7 +32,6 @@ public class TituloController {
 		  caso de alguma migração do front end, tipo para angular, JSP..., chamará sem problema*/
 		//return "CadastroTitulo";//Retorno para essa página, mas poderia enviar para uma página personalizada "SalvoComSucesso"
 		
-		//Nessa URL vou disponiblizar a lista de OPTION dinamicamente, ao invés de dados digitados no HTML. Vqi que preciso fazer isso em 10 páginas ou mais... Para isso, esse método não retornará mais tipo String e sim ModelAndView
 		ModelAndView mv = new ModelAndView("CadastroTitulo");
 		//Essa linha debaixo foi substituída pelo método que contém a notação @ModelAttriibute("todosStatusTitulo")
 		//mv.addObject("todosStatusTitulo", StatusTitulo.values());//Parâm método:"nomeDaVariável","Método da classe que contém o Enum"
@@ -61,9 +60,12 @@ public class TituloController {
 	}
 	
 	//
-	@RequestMapping("/titulos/Pesquisa-Titulos")
-	public String pesquisar() {
-		return "PesquisaTitulos";
+	@RequestMapping("/titulos/Pesquisa")
+	public ModelAndView pesquisar() {
+		List<Titulo> todosTitulos = titulos.findAll();
+		ModelAndView mv = new ModelAndView("PesquisaTitulos");
+		mv.addObject("titulos",todosTitulos);//Quer dizer que a lista "todosTitulos" estará disponível para o HTML com o nome "titulos"
+		return mv;
 	}
 	
 	

@@ -4,16 +4,21 @@
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
 	  layout:decorator="LayoutPadrao.html">
 <head>
+
 	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" href="/css/style.css" />
 	<title>Pesquisa de Titulos</title>
 </head>
 
+<!-- Essa tag diz que o conteúdo que será mostrado na página layoutPadrao.html, Será esse conteúdo para baixo  -->
 <section layout:fragment="conteudo">
  <div class="panel panel-default">
+	
 	<div class="panel-heading">
-		<h3 class="panel-title">Pesquisa de Titulos</h3>
+		<h3 class="panel-title col-md-9 titulo-panel-align-left">Pesquisa de Titulos</h3>
+		<a class="btn btn-link link-panel-align-right" href="/titulos/novo">Novo Titulo</a>
 	</div>
-
+	
 	<div class="panel-body">
 		<table class="table table-bordered table-striped">
 			<thead>
@@ -27,12 +32,29 @@
 				</tr>
 			</thead>
 			<tbody>
+
+				<tr th:each="varTitulo : ${titulos}">
+					<td class="text-center" th:text="${varTitulo.codigo}">1</td>
+					<td th:text="${varTitulo.descricao}"></td>	
+					<td class="text-center" th:text="${{varTitulo.dataVencimento}}"></td><!-- coloco mais 2chaves para usar o formato "dd/MM/yyyy" que está desenhado no pacote model -->
+					<td class="text-center" th:text="|R$ ${{varTitulo.valor}} |"></td><!-- coloco mais 2chaves para usar o formato "#,##0.00" que está desenhado no pacote model -->
+					<!-- Baseado no status vou mostrar o span vermelho ou verde -->
+					<td class="text-center" >
+						<span class="" th:text="${varTitulo.status.descricao}" 
+							th:classappend="${#strings.toString(varTitulo.status) == 'PENDENTE' ? 'label-warning' : 'label-success'}"></span>
+					</td>
+					<td class="text-center"></td>
+				</tr>
+
 				<tr>
-					<td colspan="6">Nenhum titulo foi encontrado</td>
+					<!--faço o teste no objeto "titulos" e não na variável "varTitulo" -->
+					<td colspan="6" th:if=${#lists.isEmpty(titulos)}>Nenhum titulo foi encontrado</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 </div>
 </section>
+	<script type="/js/jquery-3.3.1.min.js"></script>
+	<script type="/css/bootstrap.min.css"></script>	
 </html>

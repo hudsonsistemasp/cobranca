@@ -10,3 +10,10 @@
 	margin-left: 10px;
 	margin-right: 10px;
 }
+.link-panel-align-right{
+	float: right;
+	padding: 0px;
+}
+.titulo-panel-align-left{
+	float: left;
+}

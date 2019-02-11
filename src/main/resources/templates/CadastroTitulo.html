@@ -1,22 +1,32 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-xmlns:th="www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-	  layout:decorator="LayoutPadrao.html">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao.html">
 <head>
-	<title>Cadastro de titulo</title>
+<title>Cadastro de titulo</title>
 </head>
 
-<section layout:fragment="conteudo"><!-- Essa tag diz que o conteúdo que será mostrado na página layoutPadrao será isso para baixo  -->
-<!-- Para usar o Thymeleaf eu faço a declaração no cabeçalho acima  xmlns:th="www.thymeleaf.org"-->
+<!-- Essa tag diz que o conteúdo que será mostrado na página layoutPadrao.html, Será esse conteúdo para baixo  -->
+<section layout:fragment="conteudo">
+
+	<div class="panel-heading">
+		<h3>Cadastro de títulos</h3>
+		<a class="btn btn-link link-panel-align-right"
+			href="/titulos/Pesquisa">Nova Pesquisa</a>
+	</div>
+
+	<!-- Para usar o Thymeleaf eu faço a declaração no cabeçalho acima  xmlns:th="www.thymeleaf.org"-->
 	<form class="form-horizontal" method="POST" action="/titulos">
 		<!-- Criar uma div com a mensagem de REGISTRADO COM SUCESSO. A variável "mensagem" existe no Controller. olhar lá a lógica -->
-		<div class="alert alert-sucess alert-dismissible" role="alert" th:if="${!#strings.isEmpty(mensagem)}"><!--tags com th: são do thymeleaf -->
+		<div class="alert alert-sucess alert-dismissible" role="alert"
+			th:if="${!#strings.isEmpty(mensagem)}">
+			<!--tags com th: são do thymeleaf -->
 			<!-- Colocar um botãozinho com o 'x' de fechar -->
 			<button type="button" class="close" data-dismiss="alert"></button>
-			<span th:text="${mensagem}">Mas essa msg não aparece. Aparece a da variável "mensagem"</span>
+			<span th:text="${mensagem}">Mas essa msg não aparece. Aparece
+				a da variável "mensagem"</span>
 		</div>
-		
+
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">Novo Titulo</h3>
@@ -26,20 +36,23 @@ xmlns:th="www.thymeleaf.org"
 				<div class="form-group">
 					<label for="descricao" class="col-sm-2 control-label">Descrição</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="descricao" name="descricao"/>
+						<input type="text" class="form-control" id="descricao"
+							name="descricao" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="dataVencimento" class="col-sm-2 control-label">Data	de Vencimento</label>
+					<label for="dataVencimento" class="col-sm-2 control-label">Data
+						de Vencimento</label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control" id="dataVencimento" name="dataVencimento"/>
+						<input type="text" class="form-control" id="dataVencimento"
+							name="dataVencimento" />
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label for="valor" class="col-sm-2 control-label">Valor</label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control" id="valor" name="valor"/>
+						<input type="text" class="form-control" id="valor" name="valor" />
 					</div>
 				</div>
 
@@ -52,7 +65,9 @@ xmlns:th="www.thymeleaf.org"
 							<option value="RECEBIDO">Recebido</option-->
 							<!-- Options acima serão gerados dinâmicamente -->
 							<!--Daqui vou percorrer uma lista de valores e trazer para cá:Ver TituloController -->
-							<option th:each="varStatus : ${todosStatusTitulo}"  th:value="${varStatus}" th:text="${varStatus.descricao}"> </option>
+							<option th:each="varStatus : ${todosStatusTitulo}"
+								th:value="${varStatus}" th:text="${varStatus.descricao}">
+							</option>
 						</select>
 					</div>
 				</div>
@@ -64,9 +79,11 @@ xmlns:th="www.thymeleaf.org"
 						</div>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 	</form>
+	<script type="/js/jquery-3.3.1.min.js"></script>
+	<script type="/css/bootstrap.min.css"></script>
 </section>
 </html>
